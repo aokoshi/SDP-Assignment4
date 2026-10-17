@@ -1,0 +1,19 @@
+Verification on JDK 17
+Compile: javac --release 17 -Xlint:all -d out src/shop/*.java test/shop/*.java
+Result: success, no compiler warnings.
+
+Demo: java -cp out shop.Main
+1. Bob tries to buy two keyboards with a 10.00 USD balance.
+Order failed: Payment declined: insufficient balance.
+
+2. Alice buys the same two keyboards after rollback.
+Order: ORD-1
+Total: 100.00 USD
+Shipment: SHIP-1
+Order confirmed. The notification is stored in the local outbox.
+
+3. Another keyboard order fails because stock is now zero.
+Not enough stock: KEYBOARD
+
+Tests: java -cp out shop.OrderFacadeTest
+All 15 tests passed.

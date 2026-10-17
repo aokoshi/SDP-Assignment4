@@ -1,0 +1,40 @@
+classDiagram
+    direction TB
+    class Main {
+        +main(String[] args) void
+    }
+    class OrderFacade {
+        -InventoryService inventory
+        -PaymentProcessor payment
+        -ShippingService shipping
+        -NotificationService notifications
+        +placeOrder(Map cart, Customer customer) OrderReceipt
+    }
+    class InventoryService {
+        -Map prices
+        -Map stock
+        -Map reservations
+        +reserve(Map cart) Reservation
+        +release(String reservationId) void
+    }
+    class PaymentProcessor {
+        -Map balances
+        -Map charges
+        +charge(String customerId, BigDecimal amount) String
+        +refund(String paymentId) void
+    }
+    class ShippingService {
+        -Map shipments
+        +schedule(String address, Map items) String
+        +cancel(String shipmentId) boolean
+    }
+    class NotificationService {
+        -List messages
+        +sendConfirmation(String email, OrderReceipt receipt) void
+        +getMessages() List
+    }
+    Main ..> OrderFacade : uses
+    OrderFacade *-- InventoryService
+    OrderFacade *-- PaymentProcessor
+    OrderFacade *-- ShippingService
+    OrderFacade *-- NotificationService
