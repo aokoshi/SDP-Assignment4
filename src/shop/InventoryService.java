@@ -22,7 +22,7 @@ public class InventoryService {
         for (var item : cart.entrySet()) {
             String product = item.getKey();
             Integer quantity = item.getValue();
-            if (!prices.containsKey(product)) {
+            if (product == null || !prices.containsKey(product)) {
                 throw new IllegalArgumentException("Unknown product: " + product);
             }
             if (quantity == null || quantity <= 0) {
