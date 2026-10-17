@@ -73,5 +73,3 @@ a bank, carrier, or email server. Confirmations are stored in a local outbox.
 Data resets on restart; email validation is deliberately basic. IDs are local
 to each instance. The example omits persistence, concurrent checkout, taxes,
 discounts, and user-initiated cancellation to keep the assignment focused.
-
-Report: [docs/Report.pdf](docs/Report.pdf).
